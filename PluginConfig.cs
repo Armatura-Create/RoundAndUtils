@@ -41,5 +41,5 @@ public class EndRoundBhopConfig
     public bool Active { get; set; } = true;
 
     [JsonPropertyName("max_speed")]
-    public int MaxSpeed { get; set; } = 550;
+    public int MaxSpeed { get; set; } = 850;
 }
