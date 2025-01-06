@@ -49,7 +49,12 @@ public class RoundEndUtils : BasePlugin, IPluginConfig<PluginConfig>
 
         Cache.GetAllPlayers().ToList().ForEach(player =>
         {
-            var pawn = player.PlayerPawn?.Value;
+            var playerPawn = player.PlayerPawn;
+
+            if (playerPawn == null) return;
+
+            var pawn = playerPawn.Value;
+
             if (pawn == null) return;
 
             Logs.PrintConsole($"Resetting speed for player {player.PlayerName}");

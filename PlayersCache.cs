@@ -26,6 +26,7 @@ public class PlayersCache
 
         Logs.PrintConsole($"Player Spawned: {player.PlayerName}");
         _players.Add(player);
+        _bhopActive[player.Slot] = false;
         return HookResult.Continue;
     }
 
@@ -36,6 +37,7 @@ public class PlayersCache
 
         Logs.PrintConsole($"Player Death: {player.PlayerName}");
         _players.Remove(player);
+        _bhopActive.Remove(player.Slot);
         return HookResult.Continue;
     }
 }
