@@ -33,6 +33,7 @@ public class RoundEndUtils : BasePlugin, IPluginConfig<PluginConfig>
             {
                 foreach (var player in Cache.GetAllPlayers())
                 {
+                    if (player == null || !player.IsValid || player.IsBot) continue;
                     if (Cache.GetBhopActive(player))
                     {
                         HandleBhop(player);
