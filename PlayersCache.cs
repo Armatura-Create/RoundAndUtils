@@ -12,6 +12,7 @@ public class PlayersCache
     {
         Instance.RegisterEventHandler<EventPlayerSpawn>(OnPlayerSpawn);
         Instance.RegisterEventHandler<EventPlayerDeath>(OnPlayerDeath);
+        Instance.RegisterEventHandler<EventPlayerDisconnect>(OnPlayerDisconnect);
         Logs.PrintConsole("PlayersCache loaded");
     }
 
@@ -36,6 +37,17 @@ public class PlayersCache
         if (player is not { IsBot: false, IsValid: true }) return HookResult.Continue;
 
         Logs.PrintConsole($"Player Death: {player.PlayerName}");
+        _players.Remove(player);
+        _bhopActive.Remove(player.Slot);
+        return HookResult.Continue;
+    }
+
+    private HookResult OnPlayerDisconnect(EventPlayerDisconnect @event, GameEventInfo info)
+    {
+        var player = @event?.Userid;
+        if (player is not { IsBot: false, IsValid: true }) return HookResult.Continue;
+
+        Logs.PrintConsole($"Player Disconnect: {player.PlayerName}");
         _players.Remove(player);
         _bhopActive.Remove(player.Slot);
         return HookResult.Continue;
